@@ -1,0 +1,3 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/Applications/MySQLWorkbench.app/Contents/Resources/mysql.profiles"
+}
