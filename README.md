@@ -8,3 +8,4 @@ blin uzhe zaebaals
 есть такое бтв,  кстати почему остальные ол куйат он зэ фронтал лоуб
 don't know css zavtra sdelayu
 вы че там азуели? добавьте чето в этот файл чтобы мы поняли что видно гитхаб
+U vas otkryvaetsa net? Suda napishite che to rebyata
