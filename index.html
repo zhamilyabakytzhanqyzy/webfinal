@@ -1,124 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amirito | Freshly Grilled Made Daily</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#185d3d"><meta name="description" content="Freshly grilled sandwiches made daily in Astana.">
+  <title>Amirito | Freshly Grilled, Made Daily</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header class="site-header">
-        <a class="logo" href="#home">amirito</a>
-
-        <nav id="navigation" class="desktop-nav">
-            <a class="nav-pill active" href="#home">Home</a>
-            <a class="nav-pill active" href="#menu">Menu</a>
-            <a class="nav-pill active" href="#contact">Contact</a>
-
-        </nav>
-
-
-        <button id="menuToggle" class="menu-toggle" aria-label="Open Navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
-
-         </button>
-
-    </header>
-
-    <main id="home" class="page-layout">
-        <aside id="menu" class="sandwich-roll">
-            <button class="sandwich-card selected" data-title="Tandoori Masala Chicken" data-description="Bold flavours,fresh ingredients, and sandwiches made with care" data-image="images/tandoori-masala.jpeg"></button> <img src="images/tandoori-masala.jpg" alt="Tandoori Masala Chicken sandwich">
-    <span>
-        <strong>Tandoori Masala Chicken</strong>
-        <small> Spicy &amp; flavourful </small>
-    </span>
-
-    <b>→</b>
-    </button>
-
-            <button class="sandwich-card" data-title="Mumbai Style Veg Grilled Sandwich" data-description="Classic Mumbaipstyle sandwich with spiced potatoes " data-image="images/mumbai-style.jpeg" <img src="images2/mumbai-style.jpg" alt="Mumbai-style sandwich">
-    <span>
-        <strong> Mumbai-style sandwich</strong>
-        <small> Freshly made</small>
-    </span>
-     <b>→</b>
-     </button>
-            <button class="sandwich-card" data-title="Baursaq sandwich" data-description="A creative twist on traditional baursaq,served with a delicious savoury filling." data-image="images/baursaq.jpg">
-     <img src="images2/baursaq.jpeg"
-     alt="Baursaq sandwich">
-     <span>
-        <strong> Baursaq sandwich</strong>
-        <small>Traditonal meets modern</small>
-     </span>
-     <b>→</b>
-    </button>
-        </aside>
-        <section class="content">
-            <div class="hero">
-                <div class="hero-main">
-                <div class="hero-copy">
-                    <span class="tag">FRESH Tasty Love at first bite </span>
-                    <h1 id="heroHeading">Freshly grilled<br><span> Made daily</span></h1>
-                    <p id="heroDescription">
-                        Bold flavours,fresh ingredients, and sandwiches made with care.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#menu" class="button button-primary">Explore menu ↗</a>
-                        <a href="#contact" class="button button-secondary">Find us</a>
-
-
-                    </div>
-                    </div>
-                    <div class="hero-image-wrapper">
-                        <img id="mainSandwichImage" src="images2/mainpagesandwich.png" alt="Freshly Grilled Sandwich">
-                    </div>
-                    </div>
-                    <div id="contact" class="info-card-row" 
-                     <div class="info-card">
-                        <span class="info-icon">📍</span>
-                        </div>
-                        <strong>Find us in Astana</strong>
-                        <p>Abai Street 45A</p>
-                        </div>
-
-                 
-                    </div>
-                    <div class="info-card">
-                        <span class="info icon">🕒</span>
-                        <div>
-                            <strong>Opening Hours</strong>
-                            <p> Mon-Sun:10:00 AM-11:00 PM</p>
-                            </div>
-                           
-                        
-                        </div>
-                            <div class="map-wrapper">
-                                <img class="map-image" src="images/2map.jpeg" alt="Map showing our location in Astana">
-                            </div>
-                            </div>
-                         </div>
-                            
-                            
-                    
-                   
-                    
-                 </section>
-        
-                </main>
-                
-                <footer>
-                    <p>
-
-                    </p>
-                </footer>
-            
-                <script src="script.js"></script>
-                </body>
-    
-</html>
+<header class="site-header">
+  <a class="logo" href="#home" aria-label="Amirito home"><img src="trueimages/logo.png" alt="Amirito"></a>
+  <nav id="navigation" class="desktop-nav" aria-label="Main navigation"><a class="nav-pill active" href="#home">Home</a><a class="nav-pill" href="#menu">Menu</a><a class="nav-pill" href="#contact">Contact</a></nav>
+  <button id="menuToggle" class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navigation"><span></span><span></span><span></span></button>
+</header>
+<main id="home" class="page-layout">
+  <aside id="menu" class="sandwich-roll" aria-label="Sandwich menu">
+    <button class="sandwich-card selected" type="button" data-title="Freshly Grilled" data-second="Made Daily" data-description="Bold flavours, fresh ingredients, and sandwiches made with care." data-image="images/tandoori-masala.jpg" aria-pressed="true"><span class="dish-image dish-tandoori"></span><span class="dish-label"><strong>Tandoori<br>Masala Chicken</strong><small>2,190 ₸</small></span></button>
+    <button class="sandwich-card" type="button" data-title="Mumbai Style Veg" data-second="Grilled Sandwich" data-description="A Mumbai-style favourite with spiced potatoes and fresh vegetables." data-image="images/mumbai-style.jpg" aria-pressed="false"><span class="dish-image dish-mumbai"></span><span class="dish-label"><strong>Mumbai Style<br>Veg Sandwich</strong><small>1,990 ₸</small></span></button>
+    <button class="sandwich-card" type="button" data-title="Baursaq" data-second="Sandwich" data-description="A modern savoury sandwich inspired by a traditional baursaq." data-image="images/baursaq.jpg" aria-pressed="false"><span class="dish-image dish-baursaq"></span><span class="dish-label"><strong>Baursaq<br>Sandwich</strong><small>2,190 ₸</small></span></button>
+  </aside>
+  <section class="content" aria-label="Amirito restaurant">
+    <section class="hero" aria-labelledby="heroHeading"><div class="hero-copy"><h1 id="heroHeading">Freshly Grilled<br><span>Made Daily</span></h1><p id="heroDescription">Bold flavours, fresh ingredients, and<br class="desktop-break"> sandwiches made with care.</p><div class="hero-buttons"><a href="#menu" class="button button-primary">Explore Our Menu <b>→</b></a><a href="#contact" class="button button-secondary">Order Now</a></div></div><div class="hero-image-wrapper"><img id="mainSandwichImage" src="images2/mainpagesandwich.png" alt="Freshly grilled sandwich" onerror="this.style.display='none'"></div></section>
+    <section id="contact" class="info-card-row" aria-label="Visit Amirito">
+      <div class="info-card"><span class="info-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg></span><div><strong>Find us in Astana</strong><p>Abai Street 45A</p></div></div>
+      <div class="info-card hours-card"><span class="info-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3"/></svg></span><div><strong>Opening Hours</strong><p>Mon–Sun<br>10:00 AM–11:00 PM</p></div></div>
+      <div class="map-wrapper"><img class="map-image" src="trueimages/map.jpg" alt="Map showing Amirito's location in Astana"></div>
+    </section><footer><span>© Amirito</span><span>Freshly grilled, made daily.</span></footer>
+  </section>
+</main>
+<script>
+(() => {const toggle=document.getElementById('menuToggle'),nav=document.getElementById('navigation');toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');nav.classList.toggle('open',open)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}));document.querySelectorAll('.sandwich-card').forEach(card=>card.addEventListener('click',()=>{document.querySelectorAll('.sandwich-card').forEach(item=>{item.classList.remove('selected');item.setAttribute('aria-pressed','false')});card.classList.add('selected');card.setAttribute('aria-pressed','true');document.getElementById('heroHeading').innerHTML=`${card.dataset.title}<br><span>${card.dataset.second}</span>`;document.getElementById('heroDescription').textContent=card.dataset.description;const img=document.getElementById('mainSandwichImage');img.style.display='';img.src=card.dataset.image;img.alt=card.dataset.title;img.onerror=()=>{img.style.display='none'}}))})();
+</script>
+</body></html>
