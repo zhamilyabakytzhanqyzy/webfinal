@@ -1,5 +1,7 @@
 ![Static Badge](https://img.shields.io/badge/sandwich-team?style=plastic&label=team)
 ![Static Badge](https://img.shields.io/badge/%E2%99%A1-bro?style=social&label=amirito&labelColor=white&color=red)
+![Static Badge](https://img.shields.io/badge/coventry_university_progers-8A2BE2?style=for-the-badge)
+
 
 откройте реп для просмотра чтобы в конце .io
 edit: omg im famous 😀😀😀
