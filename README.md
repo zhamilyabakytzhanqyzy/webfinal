@@ -9,3 +9,4 @@ blin uzhe zaebaals
 don't know css zavtra sdelayu
 вы че там азуели? добавьте чето в этот файл чтобы мы поняли что видно гитхаб
 U vas otkryvaetsa net? Suda napishite che to rebyata
+sybau vse
