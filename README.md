@@ -19,5 +19,5 @@ dont get cocky with that snide grin and unassuming attitude woman
 <img width="540" height="851" alt="image" src="https://github.com/user-attachments/assets/b48fd83f-4791-437c-8255-09f34a6517b9" />
 
 
-blya eto kto dobavil chto eto
+blya eto kto dobavil chto eto  
 suka poshemu ebaniy github perestal rabotat blya, i ego odin raz tolko obmoteril
