@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fresh ingredients come together into an amirito sandwich as you scroll.">
+  <title>amirito — A whole sandwich</title>
+
+  <style>
+    :root {
+      --background: #f3f0e8;
+      --text: #2d382b;
+      --accent: #c96635;
+      --line: #c7c7b8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .sandwich-section {
+      height: 290svh;
+    }
+
+    .sandwich-stage {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      min-height: 560px;
+      overflow: hidden;
+    }
+
+    .page-header {
+      position: absolute;
+      top: 28px;
+      right: 4%;
+      left: 4%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .layer-count {
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .sandwich {
+      position: absolute;
+      top: 46%;
+      left: 50%;
+      width: min(62vw, 60svh, 620px);
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+    }
+
+    .sandwich-shadow {
+      position: absolute;
+      right: 21%;
+      bottom: 0;
+      left: 21%;
+      height: 5%;
+      border-radius: 50%;
+      background: #4c3e20;
+      filter: blur(16px);
+      opacity: 0.12;
+    }
+    .ingredient {
+      position: absolute;
+      inset: 0;
+      background-image: url("sandwich-ingredients.png");
+      background-size: 300% 200%;
+      background-repeat: no-repeat;
+      filter: drop-shadow(0 8px 8px #4b32161a);
+      will-change: transform;
+    }
+
+    .bread-top {
+      z-index: 6;
+      background-position: 0 0;
+    }
+
+    .lettuce {
+      z-index: 5;
+      background-position: 50% 0;
+    }
+
+    .tomato {
+      z-index: 4;
+      background-position: 100% 0;
+    }
+
+    .cheddar {
+      z-index: 3;
+      background-position: 0 100%;
+    }
+
+    .turkey {
+      z-index: 2;
+      background-position: 50% 100%;
+    }
+
+    .bread-bottom {
+      z-index: 1;
+      background-position: 100% 100%;
+    }
+
+    .ingredient-labels {
+      position: absolute;
+      inset: 0;
+      z-index: 7;
+      pointer-events: none;
+    }
+
+    .ingredient-label {
+      position: absolute;
+      top: 50%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0;
+      font: italic 15px Georgia, serif;
+      white-space: nowrap;
+    }
+
+    .ingredient-label::after {
+      content: "";
+      width: clamp(24px, 5vw, 80px);
+      height: 1px;
+      background: #b5b7a7;
+    }
+
+    .label-left {
+      right: 86%;
+    }
+
+    .label-right {
+      left: 86%;
+      flex-direction: row-reverse;
+    }
+
+    .sandwich-title {
+      position: absolute;
+      top: 80%;
+      width: 100%;
+      margin: 0;
+      padding: 0 20px;
+      font: italic clamp(36px, 5.5vw, 76px) Georgia, serif;
+      letter-spacing: -2px;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .page-footer {
+      position: absolute;
+      right: 4%;
+      bottom: 24px;
+      left: 4%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint,
+    .assembly-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .scroll-hint span {
+      font-size: 22px;
+    }
+
+    .progress-track {
+      width: 80px;
+      height: 2px;
+      background: var(--line);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--text);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .replay-button {
+      padding: 10px 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      cursor: pointer;
+    }
+
+    .replay-button:hover {
+      text-decoration: underline;
+    }
+
+    .replay-button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 6px;
+    }
+
+    @media (max-width: 700px) {
+      .page-header {
+        top: 22px;
+        right: 6%;
+        left: 6%;
+      }
+
+      .sandwich {
+        width: min(76vw, 56svh);
+      }
+
+      .ingredient-label {
+        gap: 5px;
+        font-size: 11px;
+      }
+
+      .ingredient-label::after {
+        width: 16px;
+      }
+
+      .label-left {
+        right: 76%;
+      }
+
+      .label-right {
+        left: 76%;
+      }
+
+      .sandwich-title {
+        top: 79%;
+        font-size: clamp(32px, 9vw, 43px);
+        letter-spacing: -1px;
+      }
+
+      .page-footer {
+        right: 6%;
+        left: 6%;
+        font-size: 8px;
+        letter-spacing: 1px;
+      }
+
+      .progress-track {
+        width: 36px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .sandwich-section {
+        height: 100svh;
+      }
+
+      .scroll-hint {
+        visibility: hidden;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="sandwich-section" aria-label="Scroll to assemble a sandwich">
+    <div class="sandwich-stage">
+      <header class="page-header">
+        <div class="brand">amirito<span>.</span></div>
+        <span class="layer-count" aria-hidden="true">01 / 06</span>
+      </header>
+
+      <div class="sandwich">
+        <div class="sandwich-shadow" aria-hidden="true"></div>
+
+        <div class="sandwich-layers" role="img"
+             aria-label="Toasted sliced bread, lettuce, tomato, cheddar and turkey come together into a sandwich.">
+          <div class="ingredient bread-top" data-spread="-1.8" data-stacked="-1.05"></div>
+          <div class="ingredient lettuce" data-spread="-1.08" data-stacked="-0.25"></div>
+          <div class="ingredient tomato" data-spread="-0.36" data-stacked="0.05"></div>
+          <div class="ingredient cheddar" data-spread="0.36" data-stacked="0.25"></div>
+          <div class="ingredient turkey" data-spread="1.08" data-stacked="0.5"></div>
+          <div class="ingredient bread-bottom" data-spread="1.8" data-stacked="1.05"></div>
+        </div>
+
+        <div class="ingredient-labels" aria-hidden="true">
+          <p class="ingredient-label label-left">Toasted bread</p>
+          <p class="ingredient-label label-right">Fresh lettuce</p>
+          <p class="ingredient-label label-left">Sliced tomato</p>
+          <p class="ingredient-label label-right">Cheddar cheese</p>
+          <p class="ingredient-label label-left">Roast turkey</p>
+          <p class="ingredient-label label-right">Toasted bread</p>
+        </div>
+      </div>
+
+      <h1 class="sandwich-title">A whole sandwich.</h1>
+
+      <footer class="page-footer">
+        <div class="scroll-hint"><span aria-hidden="true">↓</span> Scroll to assemble</div>
+        <div class="assembly-progress" aria-hidden="true">
+          <span class="progress-percent">00%</span>
+          <div class="progress-track"><div class="progress-fill"></div></div>
+        </div>
+        <button class="replay-button" type="button">Start again ↗</button>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    const section = document.querySelector('.sandwich-section');
+    const sandwich = document.querySelector('.sandwich');
+    const ingredients = document.querySelectorAll('.ingredient');
+    const labels = document.querySelectorAll('.ingredient-label');
+    const labelGroup = document.querySelector('.ingredient-labels');
+    const title = document.querySelector('.sandwich-title');
+    const scrollHint = document.querySelector('.scroll-hint');
+    const percent = document.querySelector('.progress-percent');
+    const progressFill = document.querySelector('.progress-fill');
+    const layerCount = document.querySelector('.layer-count');
+    const replayButton = document.querySelector('.replay-button');
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    let frameRequested = false;
+
+    function clamp(value, minimum, maximum) {
+      return Math.min(maximum, Math.max(minimum, value));
+    }
+
+    function updateSandwich() {
+      const scrollDistance = section.offsetHeight - window.innerHeight;
+      const scrolled = -section.getBoundingClientRect().top;
+      const progress = motionPreference.matches
+        ? 1
+        : clamp(scrolled / Math.max(scrollDistance, 1), 0, 1);
+
+      // Ease gently into the stack, then slow down as the bread closes.
+      const easedProgress = progress * progress * (3 - 2 * progress);
+      const layerSpacing = sandwich.clientWidth * 0.22;
+
+      ingredients.forEach((ingredient, index) => {
+        const spread = Number(ingredient.dataset.spread);
+        const stacked = Number(ingredient.dataset.stacked);
+        const position = spread + (stacked - spread) * easedProgress;
+
+        ingredient.style.transform = `translateY(${position * layerSpacing}px)`;
+        labels[index].style.transform = `translateY(${position * layerSpacing}px)`;
+      });
+      const titleVisibility = clamp((progress - 0.82) / 0.18, 0, 1);
+      labelGroup.style.opacity = 1 - clamp(progress / 0.45, 0, 1);
+      title.style.opacity = titleVisibility;
+      title.style.transform = `translateY(${(1 - titleVisibility) * 16}px)`;
+      scrollHint.style.opacity = 1 - titleVisibility;
+      progressFill.style.transform = `scaleX(${progress})`;
+      percent.textContent = `${Math.round(progress * 100).toString().padStart(2, '0')}%`;
+      layerCount.textContent = `${Math.min(6, Math.floor(progress * 6) + 1).toString().padStart(2, '0')} / 06`;
+
+      frameRequested = false;
+    }
+    function requestUpdate() {
+      if (frameRequested) return;
+
+      frameRequested = true;
+      window.requestAnimationFrame(updateSandwich);
+    }
+
+    replayButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: window.scrollY + section.getBoundingClientRect().top,
+        behavior: motionPreference.matches ? 'instant' : 'smooth'
+      });
+    });
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    motionPreference.addEventListener('change', requestUpdate);
+
+    updateSandwich();
+  </script>
+</body>
+</html>
