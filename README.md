@@ -10,5 +10,8 @@ don't know css zavtra sdelayu
 вы че там азуели? добавьте чето в этот файл чтобы мы поняли что видно гитхаб
 U vas otkryvaetsa net? Suda napishite che to rebyata
 sybau vse
-bro
+bro  
 
+  
+dont get cocky with that snide grin and unassuming attitude woman
+<img width="540" height="851" alt="image" src="https://github.com/user-attachments/assets/b48fd83f-4791-437c-8255-09f34a6517b9" />
