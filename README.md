@@ -21,3 +21,5 @@ dont get cocky with that snide grin and unassuming attitude woman
 
 blya eto kto dobavil chto eto  
 suka poshemu ebaniy github perestal rabotat blya, i ego odin raz tolko obmoteril
+
+Потом я могу перенести фичу в проект и прогоняю под наш стиль и название. Потом можно подключить наше хранилище что бы ремув работал у всех короче и потом фотки добавлю сэндвичей и название pon da koroche
