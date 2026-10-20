@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Manage Products</title>
+        <style>
+          body { font-family:system-ui, sans-serif; background:#f8e69d; margin:0}
+          .manage-products{max-width: 800px; margin: 0 auto; padding: 24px;}
+          .mp-section{ margin-bottom: 32px;}
+          .mp-list{ list-style:none; padding:0; margin:0; display:grid; gap: 12px;}
+          .mp-item{
+            display: flex; align-items: center; gap: 16px;
+            padding: 12px; background:#f8e69d; border: 1px solid #e3e3e3; border-radius:8px;
+
+
+          }
+        .mp-thumb{ width:64px; height: 64px; object-fit: cover; border-radius: 6px; background:#f8e69d}
+        .mp-info{flex: 1; display:flex; flex-direction: column; gap: 4px; }
+        .mp-remove{
+            background: #f8e69d; color:beige; border: 0;
+            padding: 8px 14px;border-radius: 6px; cursor: pointer;
+
+        }
+        .mp-remove:hover{background: #b82c33;}
+        .mp-empty { color: #888}
+        </style>
+        </head>
+        <body> 
+            <div class="manage-products">
+                <h1> Manage Products</h1>
+                <div id="products-groups"></div>
+
+
+
+            </div>
+
+
+       <script>
+
+        const CATEGORIES=[ "Sandwiches","Drinks","Snacks"];
+        const STORAGE_KEY="products";
+        const DEFAULT_PRODUCTS=[
+            { id: 1, name:  , category:"Sandwiches", price: ,  }
+            { id: 2, name:  , category:"Sandwiches", price: ,  }
+            { id: 3, name:  , category:"Sandwiches", price: ,  }
+            { id: 4, name:  , category:"Sandwiches", price: ,  }
+            { id: 5, name:  , category:"Sandwiches", price: ,  }
+            { id: 6, name:  , category:"Sandwiches", price: ,  }
+            
+        ];
+
+        function loadProducts(){
+            try{
+                const saved=localStorage.getItem(STORAGE_KEY);
+                if (saved) return JSON.parse(saved);
+
+            } catch (e) {}
+            return [...DEFAULT_PRODUCTS];
+
+        }
+        function saveProducts(){
+            try {localStorage.setItem(STORAGE_KEY, JSON.stringify(prodcuts));} catch (e){}
+
+        }
+        let products =loadProducts();
+        function removeProduct(id){
+            const product = products.find (p => p.id=== id);
+            if (!product || !confirm(' Remove "${product.name}"?')) return;
+            products =products.filter (p => p.id !==id);
+            saveProducts();
+            render();
+        }
+        function render (){
+            const container = document.getElementById("product-groups");
+            container.innerHTML=""
+            CATEGORIES.forEach(category=> {
+                const items=products.filter(p=> p.category === category)};
+                const section =document.createElemnt("section");
+                section.className="mp-section";
+                const title=document.createElement("h2");
+                title.textContent=category;
+                section.appendChild(title);
+                if (items.length ===0){
+                    const empty= document.createElement ("p");
+                    empty.textContent ="No products in this category.";
+                    section.appendChild(empty);
+                 } else {
+                    const list= document.createElement ("ul")
+                    list.className="mp-item";
+                    
+
+                    const img= document.createElement ("img");
+                    img.className="mp-thumb";
+                    img.src=p.imageUrl
+                    img.alt= p.name;
+                    img.onerror=() => { img.style.visibility="hidden";};
+                    const info =document.createElement("div");
+                    info.className="mp-info";
+                    const name=document.createElement("strong");
+                    name.textContent=p.name;
+                    const price=document.createElement("span");
+                    price.textContent="$" + Number(p.price). toFixed(2);
+                    info.append (name,price);
+                    
+                    const btn = document.createElement("button");
+                    btn.className="mp-remove";
+                    btn:textContent="Remove";
+                    btn.addEventListener("click", () => removeProduct(p.id));
+
+                    li.append(img, info, btn);
+                    list.appendChild(li);
+                 });
+                 section.appendChild(li);
+                }
+                render();
+                </script>
+                </body>
+                </html>
+
+            
+            }
+       </script>
