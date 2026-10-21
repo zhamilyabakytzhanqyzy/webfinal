@@ -27,3 +27,5 @@ suka poshemu ebaniy github perestal rabotat blya, i ego odin raz tolko obmoteril
   
 feature2 поменял расширение на html, но он немного сломан (все норм нужно просто подравить пару мест)
 я посмотрел на код там просто кнопок нет вроде js норм
+
+прив ребятки :)))))))))
