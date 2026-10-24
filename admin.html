@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang ="en">
+    <head>
+        <meta charset ="UTF-8">
+        <meta name ="viewport" content = "width=device-width, inital-scale=1.0">
+        <title>Amirito Admin | Add product</title>
+        <link href ="https://fonts.google.comcss2?family=Baloo+2:wght@600;800&family= Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+        :root {
+            --dark-green: #185b3d;
+            --yellow:#ffdf83;
+            --cream: #f8e69d;
+            --white: #fffdf4;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+
+
+}
+body {
+    background-color: var(--cream);
+    color:var(--dark-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+
+}
+
+.admin-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 8px 24px rgba( 24, 91, 61, 0.15);
+}
+.admin-card  h2{
+    font-family: 'Baloo 2', cursive;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    
+}
+
+#responseMessage{
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    display: none
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.form-group input[type="text"],
+.form-group select,
+.form-group textarea,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid var(--cream);
+    border-radius: 12px;
+    outline: none;
+    font-size: 13px;
+    background: #fff;
+}
+.form-group textarea{
+    resize: none;
+    height: 70px;
+
+}
+
+.char-counter {
+    font-size: 11px;
+    text-align: right;
+    color: #666;
+    margin-top: 4px;
+}
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.slider-container input [type="range"]{
+    flex: 1;
+    accent-color: var(--dark-green);
+}
+
+.price-val {
+    font-weight: 700;
+    min-width: 60px;
+    font-size: 15px;
+}
+
+
+.submit-bth {
+    width: 100%;
+    padding: 12px;
+    background:var(--dark-green);
+    color: var(--white);
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+}
+
+.submit-btn :hover{
+    transform: translateY(-2px);
+
+
+}
+
+  </style>
+ </head>
+</html>
+<div class="admin-card">
+    <div id="responseMessage"></div>
+    <form id="productForm">
+        <div class="form-group">
+            <label for="name">Prouct Name</label>
+            <input type="text" id="name" name="name" placehholder="e.g., Tandoori <asala Chicken" required>
+        </div>
+        <div class="form-group">
+            <label for="category"> Category</label>
+            <select id="category" name="category" required>
+             <option value="sandwich">Sandwich</option>
+             <option value="drink">Drink</option>
+             <option value="snack">Snack</option>
+              </select>
+        </div>
+       <div class="form-group">
+            <label for="description"> Description (Max 100 Chars)</label>
+            <select id="category" name="category" required>
+            <textarea id="description" name="description"  maxlength="100" placeholder="Short description.." required ></textarea>
+            <div class="char-counter"></span id="charcount">0</span>/100</div>
+
+            </div>
+        <div class="form-group">
+        <label for="price">Price (2000₸-5000₸)</label>
+        <div class="slider-container">
+            <input type="range" id="price" min="50" max="5000". value="2000" oninput="updatePrice(this.value)">
+            <span class="price-val" id="priceValue">2000₸-</span>
+            
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="image">Upload Product Image</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+        </div>
+
+        <button type="submit" class="submit-btn">Save Product to DataBase</button>
+
+
+    </form>
+</div>
+<script>
+    function updatePrice(val){
+        document.getElementById('priceValue').innerText=val + '₸';
+
+    }
+
+    const descInput=document.getElementById('description');
+    const charCount=document.getElementById('charCount');
+    descInput.addEventListener('input', () => {
+
+        charCount.textContent =descInput.value.length;
+
+    });
+    const form=document.getElementById('productForm');
+    const responseMessage=document.getElementById('responseMessage');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        try{
+            const response=await fetch('http://localhost:3000/api/products',{
+                method: 'POST',
+                body:formData
+            });
+        
+        const result= await response.json();
+        responseMessage.style.display ='block';
+        if (response.ok){
+            responseMessage.style.backgroundColor ='#d4edda';
+             responseMessage.style.color ='#155724';
+              responseMessage.style.innerText = result.message;
+              form.reset();
+              document.getElementById('priceValue').innerText='2000₸';
+              charCount.textContent='0';
+        } else{
+            responseMessage.stylebackgroundColor='#f8d7a';
+            responseMessage.style.color='#721c24';
+            responseMessage.innerText=result.error || 'Something went wrong';
+
+        }
+        } catch (err){
+            responseMessage.style.display='block';
+            responseMessage.style.backgroundColor='#721c24';
+            responseMessage.innerText=result.error || 'Could not connect to server.Is nose server.js running';
+
+
+         }
+        });
+ 
+
+</script>
+</body>
+</html>
