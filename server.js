@@ -7,17 +7,17 @@ const db = require('./db');
 const app= express();
 app.use (cors());
 app.use (express.json());
-app.use ('/uploads', express.static(path.join(--dirname, 'uploads')));
+app.use ('/uploads', express.static(path.join(__dirname, 'uploads')));
 const storage = multer.diskStorage({
     destination:(req, file, cb)=> {
-       cb(null, '/uploads');
+       cb(null, 'uploads/');
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
     }
 });
-const upload =multer({ sotrage: storage });
-app.post('api/products', upload.single('image'), async (req,res) => {
+const upload =multer({ storage: storage });
+app.post('/api/products', upload.single('image'), async (req,res) => {
     try{
         const { name, category, description, price} =req.body;
         const image_url=req.file? '/uploads/${req.file.filename}' : '';
@@ -27,11 +27,11 @@ app.post('api/products', upload.single('image'), async (req,res) => {
         if (description.length >100){
             return res.status(400).json({ error: 'All fields are required'});
         }
-        const numericrPrice= Number(price);
+        const numericPrice= Number(price);
         if (numericPrice <50 || numericPrice > 500){
             return res.status(400).json({ error: 'Price must be between 50 and 500'});
     }
-    const query ='INSERT INTO products (name, category, description, price, image_url) VALUES ?, ?, ?, ?, ?)';
+    const query ='INSERT INTO products (name, category, description, price, image_url) VALUES (?, ?, ?, ?, ?)';
     const [result]=await db.execute (query, [name,category,description,price,image_url]);
     res.status(201).json({
         message: "Product added successfully!",
@@ -43,7 +43,7 @@ app.post('api/products', upload.single('image'), async (req,res) => {
 }
 
 });
-app.get('api/products', async (req,res) => {
+app.get('/api/products', async (req,res) => {
     try{
         const allProducts =await db.select().from(products);
         res.json(allProducts);
@@ -57,6 +57,7 @@ app.get('api/products', async (req,res) => {
 
 
 const PORT = 3000;
-app.listen(prototype, () => {
-    console.log('Server running on http://localhost:${PORT}');
+app.listen(PORT, () => {
+    console.log(
+        `Server running on http://localhost:${PORT}`);
 });
