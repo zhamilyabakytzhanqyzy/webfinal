@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add product | Amirito</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body data-page="add-product">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Amirito home"><img src="assets/logo.png" alt="Amirito logo"></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="nav-pill" href="index.html">Home</a>
+      <a class="nav-pill" href="menu.html">Menu</a>
+      <a class="nav-pill" href="support.html">Contact</a>
+    </nav>
+    <div class="header-actions" id="headerActions"></div>
+  </header>
+  <main class="page-shell">
+    <section class="panel form-panel"><a href="admin.html">← Back to products</a><p class="eyebrow">MENU EDITOR</p><h1>Add a product</h1><div id="message" class="message" role="status"></div><form id="productForm"><label for="category">Category</label><select id="category" name="category" required><option value="">Choose category</option><option value="Sandwiches">Sandwich</option><option value="Drinks">Drink</option><option value="Snacks">Snack</option></select><label for="name">Product name</label><input id="name" name="name" maxlength="60" required><div class="row"><label for="description">Description</label><output id="charCount">0 / 100</output></div><textarea id="description" name="description" maxlength="100" rows="4" required></textarea><div class="row"><label for="price">Price</label><output id="priceOutput">250p</output></div><input id="price" name="price" type="range" min="50" max="500" step="10" value="250"><div class="row small"><span>50p</span><span>500p</span></div><label for="image">Upload product picture</label><input id="image" name="image" type="file" accept="image/png,image/jpeg,image/webp"><p class="small">JPG, PNG or WEBP, maximum 2 MB. Stored in this browser for this prototype.</p><div class="preview"><img id="imagePreview" alt="Product preview" hidden><span id="imagePlaceholder">🥪</span></div><button class="btn" type="submit">Save product</button></form></section>
+  </main>
+  <footer class="site-footer">© <span data-current-year></span> Amirito · Freshly grilled, made daily.</footer>
+</body>
+</html>

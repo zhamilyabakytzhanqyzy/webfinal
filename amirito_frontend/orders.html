@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order history | Amirito</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body data-page="orders">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Amirito home"><img src="assets/logo.png" alt="Amirito logo"></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="nav-pill" href="index.html">Home</a>
+      <a class="nav-pill" href="menu.html">Menu</a>
+      <a class="nav-pill" href="support.html">Contact</a>
+    </nav>
+    <div class="header-actions" id="headerActions"></div>
+  </header>
+  <main class="page-shell">
+    <section class="intro"><p class="eyebrow">YOUR ORDERS</p><h1>Order history</h1></section><div class="tabs"><button class="tab active" data-tab="active" type="button">Active orders</button><button class="tab" data-tab="past" type="button">Past orders</button></div><div id="activeOrders"></div><div id="pastOrders" hidden></div>
+  </main>
+  <footer class="site-footer">© <span data-current-year></span> Amirito · Freshly grilled, made daily.</footer>
+</body>
+</html>
