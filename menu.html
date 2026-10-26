@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amirito — Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark: #2d5440;
+    --green-deep: #1f4430;
+    --cream: #f0e4a0;
+    --cream-light: #fdf3b5;
+    --pill: #f5e6a0;
+    --orange: #f5d58a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--green-dark); }
+  a { text-decoration: none; color: inherit; }
+
+  /* ---------- HEADER ---------- */
+  header {
+    background: var(--green-dark);
+    display: flex; align-items: center; gap: 46px;
+    padding: 20px; min-height: 140px;
+  }
+  .logo {
+    width: 150px; height: 138px; border-radius: 50%;
+    background: var(--orange); border: 2px solid #000;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; flex-shrink: 0;
+  }
+  .logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .desktop-nav { display: flex; gap: 26px; }
+  .desktop-nav a {
+    background: var(--pill); color: #2f7d32;
+    font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 30px;
+    padding: 6px 30px; border-radius: 40px;
+    transition: transform .2s, background .2s;
+  }
+  .desktop-nav a:hover { transform: translateY(-2px); background: #fff2b0; }
+  .desktop-nav a.active { background: var(--cream-light); box-shadow: inset 0 0 0 3px var(--green-deep); }
+  .menu-toggle {
+    width: 150px; height: 74px;
+    background: var(--pill); border-radius: 40px; border: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    cursor: pointer;
+  }
+  .menu-toggle span { width: 66px; height: 1.5px; background: var(--green-dark); display: block; }
+
+  /* ---------- HEADER: Log in + Cart ---------- */
+  .header-actions { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+  .pill-btn {
+    background: var(--pill); color: #2f7d32;
+    font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 24px;
+    padding: 8px 28px; border-radius: 40px; border: none; cursor: pointer;
+    transition: transform .2s, background .2s;
+  }
+  .pill-btn:hover { transform: translateY(-2px); background: #fff2b0; }
+  .cart-count {
+    display: inline-block; min-width: 26px; height: 26px; line-height: 26px;
+    margin-left: 8px; border-radius: 50%;
+    background: var(--green-deep); color: #fff; font-size: 15px; text-align: center;
+  }
+
+  /* ---------- CATEGORY BAR (переход к категории) ---------- */
+  html { scroll-behavior: smooth; }
+  .cat-nav {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--green-deep);
+    display: flex; gap: 8px; overflow-x: auto;
+    padding: 14px 60px;
+  }
+  .cat-nav a {
+    color: #fff; font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 20px;
+    padding: 8px 22px; border-radius: 999px; white-space: nowrap;
+    transition: background .2s, color .2s;
+  }
+  .cat-nav a:hover { background: rgba(255,255,255,.15); }
+  .cat-nav a.active { background: var(--cream-light); color: var(--green-deep); }
+  .category { scroll-margin-top: 70px; }
+
+  /* ---------- MENU HERO ---------- */
+  .menu-hero {
+    padding: 50px 60px 10px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .menu-hero h1 {
+    font-family: 'Baloo 2', cursive; font-weight: 800;
+    font-size: 84px; line-height: 1; color: var(--green-dark);
+  }
+  .menu-hero p { font-size: 24px; max-width: 440px; line-height: 1.6; }
+
+  /* ---------- CATEGORIES ---------- */
+  .cat-title {
+    display: inline-block;
+    background: var(--green-dark); color: #fff;
+    font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 32px;
+    padding: 4px 28px; border-radius: 999px;
+    margin: 40px 0 0 60px;
+  }
+
+  /* ---------- GRID: фото + название под ним ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 36px;
+    align-items: start;
+    padding: 24px 60px 30px;
+  }
+  .item { cursor: pointer; text-align: center; }
+  .item img {
+    width: 100%; height: auto; display: block;
+    border-radius: 28px; background: var(--orange);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .item:hover img { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(45,84,64,.25); }
+  .item.selected img { box-shadow: 0 0 0 4px var(--green-deep); }
+  .item-name { font-weight: 600; font-size: 18px; margin-top: 12px; }
+
+  /* ---------- MODAL ---------- */
+  .modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,.45);
+    display: flex; align-items: center; justify-content: center; z-index: 100;
+  }
+  .modal[hidden] { display: none; }
+  .modal-box {
+    background: #fff; padding: 28px 24px 24px; border-radius: 20px;
+    width: min(380px, 90%); position: relative;
+  }
+  .modal-box h3 { font-family: 'Baloo 2', cursive; font-size: 26px; margin-bottom: 6px; padding-right: 30px; }
+  .modal-box p { line-height: 1.5; }
+  .m-sub { font-weight: 600; margin: 16px 0 6px; }
+  .close { position: absolute; top: 10px; right: 14px; border: 0; background: none; font-size: 28px; cursor: pointer; color: var(--green-dark); }
+  .opt { display: flex; gap: 8px; margin: 6px 0; cursor: pointer; }
+  .add-btn {
+    margin-top: 18px; width: 100%; padding: 12px; border: 0; border-radius: 14px;
+    background: var(--green-dark); color: #fff; font-size: 16px; font-weight: 600; cursor: pointer;
+  }
+  .add-btn:hover { background: var(--green-deep); }
+  .cart-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin: 10px 0; }
+  .cart-row small { display: block; color: #6b7f73; }
+  .cart-row button { border: 0; background: none; cursor: pointer; font-size: 22px; color: var(--green-dark); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1000px) {
+    header { gap: 20px; flex-wrap: wrap; }
+    .desktop-nav a { font-size: 20px; padding: 6px 20px; }
+    .logo { width: 100px; height: 94px; }
+    .menu-toggle { width: 100px; height: 52px; gap: 8px; }
+    .menu-toggle span { width: 44px; }
+    .menu-hero { padding-left: 24px; padding-right: 24px; }
+    .menu-hero h1 { font-size: 56px; }
+    .cat-title { margin-left: 24px; font-size: 26px; }
+    .grid { padding-left: 24px; padding-right: 24px; gap: 24px; }
+    .pill-btn { font-size: 18px; padding: 6px 18px; }
+    .cat-nav { padding: 12px 24px; }
+    .cat-nav a { font-size: 17px; padding: 6px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="#home" aria-label="Amirito home"><img src="trueimages/logo.png" alt="Amirito"></a>
+  <nav id="navigation" class="desktop-nav" aria-label="Main navigation"><a class="nav-pill" href="#home">Home</a><a class="nav-pill active" href="#menu">Menu</a><a class="nav-pill" href="#contact">Contact</a></nav>
+  <div class="header-actions">
+    <a class="pill-btn" href="#login">Log in</a>
+    <button class="pill-btn" id="cartBtn" type="button">Cart<span class="cart-count" id="cartCount">0</span></button>
+  </div>
+  <button id="menuToggle" class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navigation"><span></span><span></span><span></span></button>
+</header>
+
+<main id="menu">
+
+<section class="menu-hero">
+  <h1>Our Menu</h1>
+  <p>Bold flavours, fresh ingredients, and sandwiches made with care.</p>
+</section>
+
+<!-- guide for different menu sections or just button links -->
+<nav class="cat-nav" aria-label="Menu categories">
+  <a href="#sandwiches">Sandwiches</a>
+  <a href="#combos">Combos</a>
+  <a href="#snacks">Snacks</a>
+  <a href="#kids">Kids Menu</a>
+  <a href="#drinks">Drinks</a>
+</nav>
+
+<!-- amirito loh -->
+
+<section class="category" id="sandwiches">
+  <h2 class="cat-title">Sandwiches</h2>
+  <div class="grid">
+    <div class="item"><img src="images3/bauyrsaqsandwich.jpg" alt="Baursaq Sandwich"></div>
+    <div class="item"><img src="images3/beshbarmaq.jpg" alt="Beshbarmak Sandwich"></div>
+    <div class="item"><img src="images3/grilledpotato.jpg" alt="Grilled Potato Sandwich"></div>
+    <div class="item"><img src="images3/mumbaisandwich.jpg" alt="Mumbai Style Veg Grilled Sandwich"></div>
+    <div class="item"><img src="images3/tandoori.jpg" alt="Tandoori Masala Chicken Sandwich"></div>
+  </div>
+</section>
+
+<section class="category" id="combos">
+  <h2 class="cat-title">Combos</h2>
+  <div class="grid">
+    <div class="item"><img src="menu_cards/bollywoodcombo.png" alt="Bollywood Box"></div>
+    <div class="item"><img src="menu_cards/duocombo.png" alt="Desi Duo Combo"></div>
+    <div class="item"><img src="menu_cards/maharajacombo.png" alt="Maharaja Mega Combo"></div>
+    <div class="item"><img src="menu_cards/mumbaicombo.png" alt="Mumbai Masala Combo"></div>
+  </div>
+</section>
+
+<section class="category" id="snacks">
+  <h2 class="cat-title">Snacks</h2>
+  <div class="grid">
+    <div class="item"><img src="menu_cards/chickwings.png" alt="Chicken Wings"></div>
+    <div class="item"><img src="menu_cards/fries.png" alt="French Fries"></div>
+    <div class="item"><img src="menu_cards/hashbrowns.png" alt="Hashbrowns"></div>
+    <div class="item"><img src="menu_cards/manti.png" alt="Manti"></div>
+    <div class="item"><img src="menu_cards/villagefries.png" alt="Village Fries"></div>
+  </div>
+</section>
+
+<section class="category" id="kids">
+  <h2 class="cat-title">Kids Menu</h2>
+  <div class="grid">
+    <div class="item"><img src="menu_cards/combokids.png" alt="Lil' Tiger Combo"></div>
+  </div>
+</section>
+
+<section class="category" id="drinks">
+  <h2 class="cat-title">Drinks</h2>
+  <div class="grid">
+    <div class="item"><img src="menu_cards/7up.png" alt="7up"></div>
+    <div class="item"><img src="menu_cards/airan.png" alt="Airan"></div>
+    <div class="item"><img src="menu_cards/fanta.png" alt="Fanta"></div>
+    <div class="item"><img src="menu_cards/pepsi.png" alt="Pepsi"></div>
+    <div class="item"><img src="menu_cards/sprite.png" alt="Sprite"></div>
+    <div class="item"><img src="menu_cards/tea.png" alt="Tea"></div>
+    <div class="item"><img src="menu_cards/tier.png" alt="Tier"></div>
+    <div class="item"><img src="menu_cards/shubat.png" alt="Shubat"></div>
+    <div class="item"><img src="menu_cards/milk.png" alt="Milk"></div>
+    <div class="item"><img src="menu_cards/kymyz.png" alt="Kymyz"></div>
+  </div>
+</section>
+
+</main>
+
+<!-- -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-box">
+    <button class="close" id="close" aria-label="Close">×</button>
+    <h3 id="m-title"></h3>
+    <p id="m-desc"></p>
+    <div id="m-options"></div>
+    <button class="add-btn" id="add">Add to cart</button>
+  </div>
+</div>
+
+<!-- your orders-->
+<div class="modal" id="cart-modal" hidden>
+  <div class="modal-box">
+    <button class="close" id="cart-close" aria-label="Close">×</button>
+    <h3>Your cart</h3>
+    <div id="cart-list"></div>
+  </div>
+</div>
+
+<script>
+// menu data nanannnna
+const info = {
+  // Sandwiches
+  'Baursaq Sandwich': { desc: 'Traditional baursaq bread filled with a savoury mix of marinated beef, fresh vegetables and signature sauce.', ing: ['Baursaq bread', 'Marinated beef', 'Fresh vegetables', 'Signature sauce'] },
+  'Beshbarmak Sandwich': { desc: 'Tender beef with traditional flavours, slow-cooked and served in a modern sandwich.', ing: ['Slow-cooked beef', 'Onion', 'Herbs', 'Cheese'] },
+  'Grilled Potato Sandwich': { desc: 'A classic favourite.', ing: ['Spiced potato', 'Cheese', 'Herbs'] },
+  'Mumbai Style Veg Grilled Sandwich': { desc: 'Classic Mumbai-style sandwich with spiced potatoes, fresh vegetables and chutney, grilled to perfection.', ing: ['Spiced potato', 'Tomato', 'Cucumber', 'Onion', 'Chutney'] },
+  'Tandoori Masala Chicken Sandwich': { desc: 'Smoky, spicy and juicy.', ing: ['Tandoori chicken', 'Lettuce', 'Onion', 'Masala sauce'] },
+
+  // Combos
+  'Mumbai Masala Combo': { desc: 'Regular sandwich + fries + drink.', ing: ['Sandwich', 'Fries', 'Drink'] },
+  'Maharaja Mega Combo': { desc: 'Loaded sandwich + large fries + drink.', ing: ['Loaded sandwich', 'Large fries', 'Drink'] },
+  'Desi Duo Combo': { desc: 'Two sandwiches + two fries + two drinks.', ing: ['2 sandwiches', '2 fries', '2 drinks'] },
+  'Bollywood Box': { desc: 'Two sandwiches, large fries and two sauces.', ing: ['2 sandwiches', 'Large fries', 'Ketchup', 'Garlic sauce'] },
+
+  // Snacks
+  'Chicken Wings': { desc: 'Crispy wings in a glaze.', ing: ['Glaze', 'Sesame'] },
+  'French Fries': { desc: 'Golden crispy fries.', ing: ['Salt'] },
+  'Village Fries': { desc: 'Rustic potato wedges.', ing: ['Salt', 'Spices'] },
+  'Hashbrowns': { desc: 'Crispy golden hashbrowns.', ing: [] },
+  'Manti': { desc: 'Traditional steamed dumplings.', ing: [] },
+
+  // Kids menu should be completed 
+  "Lil' Tiger Combo": { desc: 'Mini chicken sandwich, small fries and juice.', ing: ['Mini chicken sandwich', 'Small fries', 'Juice'] },
+
+  // Drinks
+  'Coca Cola': { desc: 'Cold soft drink.', ing: [] },
+  'Pepsi': { desc: 'Cold soft drink.', ing: [] },
+  'Fanta': { desc: 'Cold orange soft drink.', ing: [] },
+  '7up': { desc: 'Cold lemon-lime soft drink.', ing: [] },
+  'Sprite': { desc: 'Cold lemon-lime soft drink.', ing: [] },
+  'Tea': { desc: '', ing: [] },
+  'Tier': { desc: '', ing: [] },
+  'Kymyz': { desc: 'Traditional fermented mare’s milk drink.', ing: [] },
+  'Shubat': { desc: 'Traditional fermented camel milk drink.', ing: [] },
+  'Milk': { desc: 'Fresh milk.', ing: [] },
+  'Airan': { desc: 'Refreshing fermented milk drink.', ing: [] }
+};
+
+const modal = document.getElementById('modal');
+const mTitle = document.getElementById('m-title');
+const mDesc = document.getElementById('m-desc');
+const mOptions = document.getElementById('m-options');
+
+document.querySelectorAll('.item').forEach(el => {
+  const name = el.querySelector('img').alt;
+
+  // lalalalal
+  el.insertAdjacentHTML('beforeend', `<p class="item-name">${name}</p>`);
+
+  // zaeba
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.item.selected').forEach(x => x.classList.remove('selected'));
+    el.classList.add('selected');
+
+    const d = info[name] || { desc: '', ing: [] };
+    current = name;
+    mTitle.textContent = name;
+    mDesc.textContent = d.desc;
+    mOptions.innerHTML = d.ing.length
+      ? '<p class="m-sub">Ingredients (uncheck to remove):</p>' +
+        d.ing.map(i => `<label class="opt"><input type="checkbox" checked> ${i}</label>`).join('')
+      : '';
+    modal.hidden = false;
+  });
+});
+
+// ---------- draftsfstts ----------
+const cart = [];
+let current = '';
+const cartModal = document.getElementById('cart-modal');
+const cartList = document.getElementById('cart-list');
+const cartCount = document.getElementById('cartCount');
+
+function renderCart() {
+  cartCount.textContent = cart.length;
+  cartList.innerHTML = cart.length
+    ? cart.map((c, i) => `
+        <div class="cart-row">
+          <div>${c.name}${c.removed.length ? `<small>without: ${c.removed.join(', ')}</small>` : ''}</div>
+          <button data-i="${i}" aria-label="Remove">×</button>
+        </div>`).join('')
+    : '<p>Cart is empty.</p>';
+}
+renderCart();
+
+document.getElementById('add').onclick = () => {
+  const removed = [...mOptions.querySelectorAll('input:not(:checked)')]
+    .map(i => i.parentElement.textContent.trim());
+  cart.push({ name: current, removed });
+  renderCart();
+  closeModal();
+};
+cartList.addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (b) { cart.splice(+b.dataset.i, 1); renderCart(); }
+});
+document.getElementById('cartBtn').onclick = () => cartModal.hidden = false;
+
+// ---------- closing the windows ----------
+function closeModal() { modal.hidden = true; cartModal.hidden = true; }
+document.getElementById('close').onclick = closeModal;
+document.getElementById('cart-close').onclick = closeModal;
+modal.onclick = e => { if (e.target === modal) closeModal(); };
+cartModal.onclick = e => { if (e.target === cartModal) closeModal(); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ---------- selector ----------
+const catLinks = document.querySelectorAll('.cat-nav a');
+const sections = [...document.querySelectorAll('.category')];
+
+function updateActive() {
+  let cur = sections[0];
+  sections.forEach(s => { if (s.getBoundingClientRect().top <= 100) cur = s; });
+  // coloring the last category when scrolled to the bottom
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+    cur = sections[sections.length - 1];
+  }
+  catLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur.id));
+}
+window.addEventListener('scroll', updateActive);
+updateActive();
+</script>
+</body>
+</html>
