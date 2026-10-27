@@ -29,7 +29,7 @@ six seveeeen
 <img width="175" height="38" alt="image" src="https://github.com/user-attachments/assets/0a5f777c-1d4a-440d-9d58-e078825969eb" />
 
 
-amir alo otkroi telegu poch ty nas ignorish
+amir alo otkroi telegu poch ty nas ignorish (я не могу зайти в тг )
 
 blyat pohiu na etot 67
 
