@@ -25,5 +25,7 @@ feature2 поменял расширение на html, но он немного
 ну по идеи да чутьчтуь подозрительно
 pizdec koroche rebyata nado zakanchivat u islama vse gotovo   
 (┬┬﹏┬┬) согласен, они уже ладе все базы настроили. ну эм конечно им потом чутьчуть это обьяснять  
-six seveeeen <img width="150" height="47" alt="image" src="https://github.com/user-attachments/assets/c9d969d4-240f-4abd-8d17-caca3511ad79" />
+six seveeeen  
+<img width="175" height="38" alt="image" src="https://github.com/user-attachments/assets/0a5f777c-1d4a-440d-9d58-e078825969eb" />
+
  
