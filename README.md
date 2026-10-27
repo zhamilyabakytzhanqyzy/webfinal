@@ -28,4 +28,8 @@ pizdec koroche rebyata nado zakanchivat u islama vse gotovo
 six seveeeen  
 <img width="175" height="38" alt="image" src="https://github.com/user-attachments/assets/0a5f777c-1d4a-440d-9d58-e078825969eb" />
 
+
+blyat pohiu na etot 67
+
+
  
